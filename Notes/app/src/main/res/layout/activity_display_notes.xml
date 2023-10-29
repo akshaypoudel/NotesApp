@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pp"
+    tools:context=".DisplayNotes">
+
+    <EditText
+        android:id="@+id/__titleEditText"
+        android:layout_width="0dp"
+        android:layout_height="132dp"
+        android:background="@android:color/transparent"
+        android:hint="Title"
+        android:inputType="textMultiLine"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textColorHint="#95FFFFFF"
+        android:textSize="37sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001" />
+
+    <TextView
+        android:id="@+id/__dateTextinDisplayNote"
+        android:layout_width="165dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="1dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="15dp"
+        android:text="10 December 12:12 PM"
+        android:textColor="@color/white"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/__titleEditText" />
+
+    <TextView
+        android:id="@+id/__charTextinDisplayNote"
+        android:layout_width="134dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="1dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="15dp"
+        android:text="|   0 characters"
+        android:textColor="@color/white"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/__dateTextinDisplayNote"
+        app:layout_constraintTop_toBottomOf="@+id/__titleEditText" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/__notesDoneFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="#8A7D7B"
+        android:contentDescription="@string/empty"
+        android:onClick="Save1"
+        android:src="@drawable/baseline_done_24"
+        app:fabCustomSize="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.881"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/white" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/__charTextinDisplayNote">
+
+        <EditText
+            android:id="@+id/__contentEditText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:ems="10"
+            android:gravity="start"
+            android:hint="@string/start_typing"
+            android:inputType="textMultiLine"
+            android:paddingStart="15dp"
+            android:paddingTop="35dp"
+            android:paddingEnd="0dp"
+            android:textAlignment="textStart"
+            android:textColorHint="#79FFFFFF"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
