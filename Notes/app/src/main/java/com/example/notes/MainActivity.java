@@ -1,7 +1,9 @@
 package com.example.notes;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,13 +12,15 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
     public static final String TITLE_TEXT="TitleTextView";
@@ -33,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static ArrayList<CreateNotes> notes = new ArrayList<CreateNotes>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -42,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         onCreateCalled=true;
         _listView = findViewById(R.id.listView);
         emptyScreenTxtView=findViewById(R.id.emptyScreenTextView);
+
+        fetchSharedPreference();
+        setBackgroundThemes(BackgroundThemes.theme);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Notes");
@@ -52,6 +58,27 @@ public class MainActivity extends AppCompatActivity {
         SetEmptyNotesTextBox();
         _adapter = new AkkuAdapter(this, R.layout.akku_layout, notes);
         _listView.setAdapter(_adapter);
+    }
+    private void saveSharedPreference(int data)
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+        // write all the data entered by the user in SharedPreference and apply
+        myEdit.putInt("theme", data);
+        myEdit.apply();
+    }
+    private void fetchSharedPreference()
+    {
+        SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        BackgroundThemes.theme=sharedPreferences.getInt("theme",0);
+    }
+    public void setBackgroundThemes(int theme)
+    {
+        ConstraintLayout myConstraintLayout = findViewById(R.id.myConstraintLayout);
+        myConstraintLayout.setBackgroundResource(BackgroundThemes.themesArr[theme]);
+        BackgroundThemes.theme=theme;
+        saveSharedPreference(theme);
     }
 
     @Override
@@ -85,7 +112,9 @@ public class MainActivity extends AppCompatActivity {
     {
         notes.remove(position);
         if(_adapter!=null)
+        {
             _adapter.notifyDataSetChanged();
+        }
 
         SetEmptyNotesTextBox();
         int a=notes.size();
@@ -101,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             notes.add(handler.getNote((int)i));
         }
     }
+
     public void DeleteDataBase(int a)
     {
         DBHandler handler = new DBHandler(this,SaveNotes.MY_DATABASE_NAME,null,1);
@@ -112,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete Note?");
         builder.setMessage("Do You Want to Delete this Note?");
+
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -170,4 +201,39 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.action_mode_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.action_themes1:
+                setBackgroundThemes(0);
+                break;
+            case R.id.action_themes2:
+                setBackgroundThemes(1);
+                break;
+            case R.id.action_themes3:
+                setBackgroundThemes(2);
+                break;
+            case R.id.action_themes4:
+                setBackgroundThemes(3);
+                break;
+            case R.id.action_themes5:
+                setBackgroundThemes(4);
+                break;
+            case R.id.action_themes6:
+                setBackgroundThemes(5);
+                break;
+            default:
+                //setBackgroundThemes(0);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

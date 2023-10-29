@@ -2,6 +2,7 @@ package com.example.notes;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -32,6 +33,7 @@ public class DisplayNotes extends AppCompatActivity {
     private LocalDateTime currentTime;
 
     private static int charCount=0;
+    private boolean isSaved=false;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,9 @@ public class DisplayNotes extends AppCompatActivity {
         setContentView(R.layout.activity_display_notes);
 
         ActionBar actionBar = getSupportActionBar();
+
+        ConstraintLayout myConstraintLayout = findViewById(R.id.myConstraintLayout2);
+        myConstraintLayout.setBackgroundResource(BackgroundThemes.themesArr[BackgroundThemes.theme]);
 
 // Set the background color of the ActionBar to blue
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF0E0E16")));
@@ -147,6 +152,11 @@ public class DisplayNotes extends AppCompatActivity {
         notesDoneFab.setVisibility(View.INVISIBLE);
         contentText.clearFocus();
         titleText.clearFocus();
+        if(!isSaved)
+        {
+            isSaved=true;
+            AddToDataBase1();
+        }
     }
     public void AddToDataBase1()
     {
@@ -177,7 +187,11 @@ public class DisplayNotes extends AppCompatActivity {
     public void onBackPressed() {
         titleText.clearFocus();
         contentText.clearFocus();
-        AddToDataBase1();
+        if(!isSaved)
+        {
+            isSaved=true;
+            AddToDataBase1();
+        }
         super.onBackPressed();
     }
     @Override

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_delete"
+        android:title="Themes"
+        android:icon="@drawable/icons"
+        app:showAsAction="ifRoom" >
+
+        <menu>
+            <item android:id="@+id/action_themes1"
+                android:title="Theme 1"
+
+                />
+            <item android:id="@+id/action_themes2"
+                android:title="Theme 2"
+                />
+            <item android:id="@+id/action_themes3"
+            android:title="Theme 3"
+                />
+            <item android:id="@+id/action_themes4"
+            android:title="Theme 4"
+                />
+            <item android:id="@+id/action_themes5"
+                android:title="Theme 5"
+                />
+            <item android:id="@+id/action_themes6"
+                android:title="Theme 6"
+                />
+        </menu>
+    </item>
+
+</menu>

@@ -1,9 +1,8 @@
 package com.example.notes;
 
-import static android.app.PendingIntent.getActivity;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -32,6 +31,7 @@ public class Add_Note extends AppCompatActivity {
 
     private FloatingActionButton notesDoneFab;
     private static boolean isOnPage;
+    private boolean isDataSaved;
 
 
     private static int charCount=0;
@@ -39,6 +39,10 @@ public class Add_Note extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
+
+        ConstraintLayout myConstraintLayout = findViewById(R.id.myConstraintLayout1);
+        myConstraintLayout.setBackgroundResource(BackgroundThemes.themesArr[BackgroundThemes.theme]);
+
         isOnPage=true;
 
         titleEditText     =   findViewById(R.id.titleEditText);
@@ -131,10 +135,14 @@ public class Add_Note extends AppCompatActivity {
     }
     public void Save(View view)
     {
-        //AddToDataBase();
         notesDoneFab.setVisibility(View.INVISIBLE);
         contentEditText.clearFocus();
         titleEditText.clearFocus();
+        if(!isDataSaved)
+        {
+            isDataSaved=true;
+            AddToDataBase();
+        }
 
     }
     private void AddToDataBase()
@@ -168,7 +176,11 @@ public class Add_Note extends AppCompatActivity {
     public void onBackPressed() {
         contentEditText.clearFocus();
         titleEditText.clearFocus();
-        AddToDataBase();
+        if(!isDataSaved)
+        {
+            isDataSaved=true;
+            AddToDataBase();
+        }
         super.onBackPressed();
     }
 

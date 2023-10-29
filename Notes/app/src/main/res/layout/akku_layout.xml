@@ -53,5 +53,6 @@
             android:text="Date"
             android:textColor="#FFFFFF"
             android:textSize="10sp" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

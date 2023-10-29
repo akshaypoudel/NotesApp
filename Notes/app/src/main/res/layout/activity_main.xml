@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/oo"
     tools:context=".MainActivity">
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginBottom="48dp"
-        android:backgroundTint="#9A8078"
+        android:backgroundTint="#CF7357"
         android:contentDescription="@string/empty"
         android:onClick="Fab"
         android:src="@drawable/baseline_add_24"

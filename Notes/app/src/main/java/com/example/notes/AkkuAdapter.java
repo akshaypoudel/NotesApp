@@ -1,6 +1,7 @@
 package com.example.notes;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,9 @@ public class AkkuAdapter extends ArrayAdapter<CreateNotes>
 {
     private ArrayList<CreateNotes> arr;
     private MainActivity activity;
+    private boolean isActionMode = false;
+    private ArrayList<Integer> selectedItems = new ArrayList<>();
+
     Context context;
 
     public AkkuAdapter(@NonNull Context context, int resource, @NonNull ArrayList<CreateNotes> arr)
@@ -79,5 +83,27 @@ public class AkkuAdapter extends ArrayAdapter<CreateNotes>
             return true;
         });
         return convertView;
+
+    }
+
+    private void ToggleSelection(int position) {
+        if (selectedItems.contains(position)) {
+            selectedItems.remove(Integer.valueOf(position));
+        } else {
+            selectedItems.add(position);
+        }
+        notifyDataSetChanged();
+    }
+
+    // Method to clear item selection
+    public void ClearSelection() {
+        isActionMode = false;
+        selectedItems.clear();
+        notifyDataSetChanged();
+    }
+
+    // Method to get the selected items
+    public ArrayList<Integer> getSelectedItems() {
+        return selectedItems;
     }
 }
